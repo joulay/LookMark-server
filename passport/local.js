@@ -4,10 +4,12 @@ const {Strategy: LocalStrategy} = require('passport-local');
 const User = require ('../models/user');
 
 const localStrategy = new LocalStrategy((username, password, done) => {
+  console.log('localstrath.alskdjlaksjdasdsdasdasdasdasd');
   let user;
   User
     .findOne({ username })
     .then(results => {
+      console.log('first point --------------');
       user = results;   
         
       if (!user) {

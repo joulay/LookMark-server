@@ -7,5 +7,6 @@ module.exports = {
         process.env.DATABASE_URL || 'mongodb://localhost/capstone',
   TEST_DATABASE_URL:
         process.env.TEST_DATABASE_URL ||
-        'mongodb://localhost/thinkful-backend-test'
+        'mongodb://localhost/thinkful-backend-test',
+  JWT_SECRET: process.env.JWT_SECRET
 };
