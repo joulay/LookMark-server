@@ -1,20 +1,20 @@
 [
     {
-      "_id": "1",
+
       "fullname": "Keyser Soze",
       "email": "ks@gmail.com",
       "username": "ksoz",
       "password": "password"
     },
     {
-      "_id": "2",
+
       "fullname": "User Two",
       "email": "u2@gmail.com",
       "username": "user2",
       "password": "password"
     },
     {
-      "_id": "3",
+
       "fullname": "Yodeling Kid",
       "email": "yk@gmail.com",
       "username": "walmartyk",

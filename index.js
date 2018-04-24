@@ -7,6 +7,8 @@ const morgan = require('morgan');
 const { PORT, CLIENT_ORIGIN } = require('./config');
 const { dbConnect } = require('./db-mongoose');
 
+const usersRouter = require('./routes/users');
+
 const app = express();
 
 app.use(
@@ -21,14 +23,7 @@ app.use(
   })
 );
 
-app.get('/test', (req, res) => {
-  const users = [
-    {name: 'Tokiko'},
-    {name: 'Katie'},
-    {name: 'Tina'}
-  ];
-  res.json(users);
-});
+app.use('/api', usersRouter);
 
 function runServer(port = PORT) {
   const server = app
