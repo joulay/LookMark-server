@@ -6,7 +6,9 @@ const router = express.Router();
 const passport = require('passport');
 const mongoose = require('mongoose');
 
-const Bride = require('../models/brides');
+
+
+const Bride = require('../models/bride');
 
 router.use(passport.authenticate('jwt', { session: false, failWithError: true }));
 
