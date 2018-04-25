@@ -8,19 +8,23 @@ const passport = require('passport');
 
 const { PORT, CLIENT_ORIGIN } = require('./config');
 const { dbConnect } = require('./db-mongoose');
+// const methodOverride = require('method-override');
 
 const usersRouter = require('./routes/users');
 const authRouter = require('./routes/auth');
-const brideRouter = require('./router/brides');
+const photoRouter = require('./routes/photos');
+const brideRouter = require('./routes/brides');
 const localStrategy = require('./passport/local');
 const jwtStrategy = require('./passport/jwt');
 
 
 const app = express();
 
+//app.use(bodyParser.json())
+
 app.use(
   morgan(process.env.NODE_ENV === 'production' ? 'common' : 'dev', {
-    skip: (req, res) => process.env.NODE_ENV === 'test'
+    skip: () => process.env.NODE_ENV === 'test'
   })
 );
 
@@ -30,11 +34,14 @@ app.use(
   })
 );
 
+// app.use(methodOverride('_method'))
+app.use('/api', authRouter);
+app.use('/api', usersRouter);
+
 passport.use(localStrategy);
 passport.use(jwtStrategy);
 
-app.use('/api', usersRouter);
-app.use('/api', authRouter);
+app.use('/api', photoRouter);
 app.use('/api', brideRouter);
 
 function runServer(port = PORT) {
