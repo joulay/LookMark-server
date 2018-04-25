@@ -10,7 +10,7 @@ const mongoose = require('mongoose');
 
 const Bride = require('../models/bride');
 
-router.use(passport.authenticate('jwt', { session: false, failWithError: true }));
+// router.use(passport.authenticate('jwt', { session: false, failWithError: true }));
 
 router.get('/brides', (req, res, next) => {
 //   const { searchTerm, folderId, tagId } = req.query;
@@ -68,3 +68,44 @@ router.post('/brides', (req, res, next) => {
       next(err);
     });
 });
+
+router.put('/brides/:id', (req, res, next) => {
+  const { id } = req.params;
+  const { firstName, lastName, weddingDate, location} = req.body;
+  const userId = req.user.id;
+  const updateItem = { firstName, lastName, weddingDate, location };
+  const options = { new: true };
+  
+  Promise.all()
+    .then(() => {
+      return Bride.findByIdAndUpdate(id, updateItem, options)
+        .then(result => {
+          if (result) {
+            res.json(result);
+          } else {
+            next();
+          }
+        })
+        .catch(err => next(err));
+    });
+});
+
+/* ========== DELETE/REMOVE A SINGLE ITEM ========== */
+router.delete('/brides/:id', (req, res, next) => {
+  const { id } = req.params;
+  const userId = req.user.id;
+
+  Bride.findOneAndRemove({_id:id, userId})
+    .then(result => {
+      if (result) {
+        res.status(204).end();
+      } else {
+        next();
+      }
+    })
+    .catch(err => {
+      next(err);
+    });
+});
+
+module.exports = router;
