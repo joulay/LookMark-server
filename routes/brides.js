@@ -10,7 +10,7 @@ const mongoose = require('mongoose');
 
 const Bride = require('../models/bride');
 
-// router.use(passport.authenticate('jwt', { session: false, failWithError: true }));
+router.use(passport.authenticate('jwt', { session: false, failWithError: true }));
 
 router.get('/brides', (req, res, next) => {
 //   const { searchTerm, folderId, tagId } = req.query;
