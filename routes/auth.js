@@ -20,16 +20,14 @@ function createAuthToken (user) {
 
 
 router.post('/login', bodyParser.json(), localAuth, (req, res) => {
-  console.log('!@^!$@^!@%&!^@%&!^@%&^!@%', req.user);
-
-  
   const authToken = createAuthToken(req.user);
+  console.log(authToken);
   return res.json({ authToken });
 });
 
 const jwtAuth = passport.authenticate('jwt', { session: false, failWithError: true });
 
-router.post('/refresh', jwtAuth, (req, res) => {
+router.post('/refresh', bodyParser.json(), jwtAuth, (req, res) => {
   const authToken = createAuthToken(req.user);
   res.json({ authToken });
 });
