@@ -2,14 +2,12 @@
     {
         "firstName": "Jason",
         "lastName": "Brother",
-        "phone": "312-246-4853",
         "weddingDate": "6/4/18",
         "location": "Huntington Beach"
     },
     {
         "firstName": "Rihanna",
         "lastName": "Fenty",
-        "phone": "401-136-4553",
         "weddingDate": "4/20/18",
         "location": "Barbados"
     }

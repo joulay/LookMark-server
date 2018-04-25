@@ -11,6 +11,7 @@ const { dbConnect } = require('./db-mongoose');
 
 const usersRouter = require('./routes/users');
 const authRouter = require('./routes/auth');
+const brideRouter = require('./router/brides');
 const localStrategy = require('./passport/local');
 const jwtStrategy = require('./passport/jwt');
 
@@ -34,6 +35,7 @@ passport.use(jwtStrategy);
 
 app.use('/api', usersRouter);
 app.use('/api', authRouter);
+app.use('/api', brideRouter);
 
 function runServer(port = PORT) {
   const server = app
