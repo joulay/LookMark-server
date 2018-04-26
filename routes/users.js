@@ -6,6 +6,7 @@ const User = require('../models/user');
 const bodyParser = require('body-parser');
 const router = express.Router();
 
+router.use(bodyParser.json());
 
 router.get('/users', (req, res, next)=> {
   User.find()

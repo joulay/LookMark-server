@@ -5,7 +5,7 @@ const router = express.Router();
 
 const passport = require('passport');
 const mongoose = require('mongoose');
-
+const bodyParser = require('body-parser');
 
 
 const Bride = require('../models/bride');
@@ -53,25 +53,24 @@ router.get('/brides/:id', (req, res, next) => {
 });
 
 
-router.post('/brides', (req, res, next) => {
+router.post('/brides', bodyParser.json(),  (req, res, next) => {
   const { firstName, lastName, phone, email, weddingDate, location} = req.body;
   console.log(req.body.weddingDate);
   const userId = req.user.id;
   const newBride = { firstName, lastName, phone, email, weddingDate, location, userId };
   
-  Promise.all()
-    .then(() =>
-      Bride.create(newBride))
-    .then(result => {
-      res.location(`${req.originalUrl}/${result.id}`).status(201).json(result);
-    })
-    .catch(err => {
-      console.log(err);
-      next(err);
-    });
+  Bride.create(newBride)
+   .then(result => {
+    res.location(`${req.originalUrl}/${result.id}`).status(201).json(result);
+  })
+  .catch(err => {
+    console.log(err);
+    next(err);
+  });
+
 });
 
-router.put('/brides/:id', (req, res, next) => {
+router.put('/brides/:id', bodyParser.json(), (req, res, next) => {
   const { id } = req.params;
   const { firstName, lastName, phone, email, weddingDate, location} = req.body;
   const userId = req.user.id;
