@@ -54,9 +54,10 @@ router.get('/brides/:id', (req, res, next) => {
 
 
 router.post('/brides', (req, res, next) => {
-  const { firstName, lastName, weddingDate, location} = req.body;
+  const { firstName, lastName, phone, email, weddingDate, location} = req.body;
+  console.log(req.body.weddingDate);
   const userId = req.user.id;
-  const newBride = { firstName, lastName, weddingDate, location, userId };
+  const newBride = { firstName, lastName, phone, email, weddingDate, location, userId };
   
   Promise.all()
     .then(() =>
@@ -65,15 +66,16 @@ router.post('/brides', (req, res, next) => {
       res.location(`${req.originalUrl}/${result.id}`).status(201).json(result);
     })
     .catch(err => {
+      console.log(err);
       next(err);
     });
 });
 
 router.put('/brides/:id', (req, res, next) => {
   const { id } = req.params;
-  const { firstName, lastName, weddingDate, location} = req.body;
+  const { firstName, lastName, phone, email, weddingDate, location} = req.body;
   const userId = req.user.id;
-  const updateItem = { firstName, lastName, weddingDate, location };
+  const updateItem = { firstName, lastName, phone, email, weddingDate, location };
   const options = { new: true };
   
   Promise.all()
