@@ -6,9 +6,9 @@ const router = express.Router();
 const passport = require('passport');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
-
-
 const Bride = require('../models/bride');
+
+// const jwtAuth = passport.authenticate('jwt', {session:false});
 
 router.use(passport.authenticate('jwt', { session: false, failWithError: true }));
 
@@ -32,6 +32,7 @@ router.get('/brides', (req, res, next) => {
 router.get('/brides/:id', (req, res, next) => {
   const { id } = req.params;
   const userId = req.user.id;
+
   
   if (!mongoose.Types.ObjectId.isValid(id)) {
     const err = new Error('The `id` is not valid');
@@ -63,6 +64,11 @@ router.post('/brides', bodyParser.json(),  (req, res, next) => {
    .then(result => {
     res.location(`${req.originalUrl}/${result.id}`).status(201).json(result);
   })
+  .then(() => {
+    console.log(newBride)
+    return newBride
+  }) 
+  //send back bride 1
   .catch(err => {
     console.log(err);
     next(err);
