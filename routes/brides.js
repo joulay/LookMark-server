@@ -82,20 +82,22 @@ router.put('/brides/:id', bodyParser.json(), (req, res, next) => {
   const userId = req.user.id;
   const updateItem = { firstName, lastName, phone, email, weddingDate, location };
   const options = { new: true };
-  
-  Promise.all()
-    .then(() => {
-      return Bride.findByIdAndUpdate(id, updateItem, options)
-        .then(result => {
-          if (result) {
-            res.json(result);
-          } else {
-            next();
-          }
-        })
-        .catch(err => next(err));
-    });
-});
+  console.log('REQ DOT BODY',req.body )
+  console.log('UPDATED ITEM ALSKJALSKJ', updateItem)
+  console.log('id', id)
+
+
+  Bride.findByIdAndUpdate(id, updateItem, options)
+      .then(result => {
+        console.log(result);
+        if (result) {
+          res.json(result);
+        } else {
+          next();
+        }
+      })
+      .catch(err => next(err));
+  });
 
 /* ========== DELETE/REMOVE A SINGLE ITEM ========== */
 router.delete('/brides/:id', (req, res, next) => {
