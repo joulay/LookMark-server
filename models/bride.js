@@ -1,5 +1,3 @@
-import { METHODS } from 'http';
-
 'use strict';
 
 const mongoose = require('mongoose');
@@ -35,6 +33,4 @@ module.exports = mongoose.model('Bride', brideSchema);
 
 //reply on component to decide what it needs to render
 //component to display the form
-
-
 //to trigger a rerender, life cycle METHODS
