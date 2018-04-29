@@ -56,7 +56,6 @@ router.get('/brides/:id', (req, res, next) => {
 
 router.post('/brides', bodyParser.json(),  (req, res, next) => {
   const { firstName, lastName, phone, email, weddingDate, location} = req.body;
-  console.log(req.body.weddingDate);
   const userId = req.user.id;
   const newBride = { firstName, lastName, phone, email, weddingDate, location, userId };
   
@@ -68,7 +67,6 @@ router.post('/brides', bodyParser.json(),  (req, res, next) => {
     console.log(newBride)
     return newBride
   }) 
-  //send back bride 1
   .catch(err => {
     console.log(err);
     next(err);
