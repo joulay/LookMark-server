@@ -9,6 +9,7 @@ const brideSchema = new mongoose.Schema({
   email: {type: String},
   weddingDate: {type: String},
   location: {type:String},
+  notes: {type:String},
   created: { type: Date, default: Date.now },
   userId: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true }
 });
