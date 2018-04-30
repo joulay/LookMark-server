@@ -12,10 +12,11 @@ const { dbConnect } = require('./db-mongoose');
 
 const usersRouter = require('./routes/users');
 const authRouter = require('./routes/auth');
-// const photoRouter = require('./routes/photos');
+const photoRouter = require('./routes/photos');
 const brideRouter = require('./routes/brides');
 const localStrategy = require('./passport/local');
 const jwtStrategy = require('./passport/jwt');
+const fileUpload = require('express-fileupload');
 
 
 const app = express();
@@ -34,9 +35,14 @@ app.use(
   })
 );
 
+app.use(fileUpload());
+
+app.use('/uploads', express.static(__dirname + '/uploads'))
+
 // app.use(methodOverride('_method'))
 app.use('/api', authRouter);
 app.use('/api', usersRouter);
+app.use('/api', photoRouter);
 
 passport.use(localStrategy);
 passport.use(jwtStrategy);
@@ -55,19 +61,6 @@ function runServer(port = PORT) {
     });
 }
 
-app.post('/upload', (req, res, next) => {
-  console.log(req);
-  let imageFile = req.files.file;
-
-  imageFile.mv(`${__dirname}/public/${req.body.filename}.jpg`, function(err) {
-    if (err) {
-      return res.status(500).send(err);
-    }
-
-    res.json({file: `public/${req.body.filename}.jpg`});
-  });
-
-})
 
 if (require.main === module) {
   dbConnect();

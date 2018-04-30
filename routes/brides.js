@@ -8,7 +8,7 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const Bride = require('../models/bride');
 
-// const jwtAuth = passport.authenticate('jwt', {session:false});
+
 
 router.use(passport.authenticate('jwt', { session: false, failWithError: true }));
 
