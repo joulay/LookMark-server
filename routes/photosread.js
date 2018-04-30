@@ -38,3 +38,90 @@
 // 	});
 // });
 
+
+
+
+
+
+
+
+
+// import React, { Component } from 'react'
+
+// import FineUploaderTraditional from 'fine-uploader-wrappers'
+// import Gallery from 'react-fine-uploader'
+
+// // ...or load this specific CSS file using a <link> tag in your document
+// // import 'react-fine-uploader/gallery/gallery.css'
+
+
+// //uploader is required property 
+// //
+
+// const uploader = new FineUploaderTraditional({
+//     options: {
+//        request: {
+//           endpoint: 'my/upload/endpoint'
+//        }
+//     }
+//  })
+
+// class UploadComponent extends Component {
+//     render() {
+//         return (
+            
+//             <Gallery uploader={uploader} />
+           
+//         )
+//     }
+// }
+
+// export default UploadComponent
+
+// import React from 'react'
+// import ReactDOM from 'react-dom'
+
+// import FileInput from 'react-fine-uploader/file-input'
+// import FineUploaderTraditional from 'fine-uploader-wrappers'
+
+// const uploader = new FineUploaderTraditional({
+//    options: {
+//       request: {
+//          endpoint: 'my/upload/endpoint'
+//       }
+//    }
+// })
+
+// const fileInput = (
+//    <FileInput multiple accept='image/*' uploader={ uploader }>
+//       <span class="icon ion-upload">Choose Files</span>
+//    </FileInput>
+// )
+
+// export default ReactDOM.render(
+//     fileInput,
+//     document.getElementById('content')
+// )
+//upload file locally and keep track of path (i.e /upload/cocainebear.png)
+//save this path/directory to mongo
+//whenever it's called from frontend, get request(query) /upload/cocainebear.png
+//in react <img src={mongo.filepath} />
+
+// {/* <device type="media" onchange="update(this.data)"></device>
+// <script>
+//   function update(stream) {
+//     document.querySelector('video').src = stream.url;
+//   }
+// </script> */}
+
+// iOS6+ or Android 3.0+
+
+// function hasGetUserMedia() {
+//     return !!(navigator.mediaDevices && navigator.mediaDevices.getUserMedia);
+//   }
+  
+//   if (hasGetUserMedia()) {
+//     alert('good to goooo')
+//   } else {
+//     alert('getUserMedia() is not supported by your browser');
+//   }

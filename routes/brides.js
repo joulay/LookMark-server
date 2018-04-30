@@ -19,7 +19,7 @@ router.get('/brides', (req, res, next) => {
   let filter = {userId};
 
   Bride.find(filter)
-    .sort('created') //sort by date
+    .sort('weddingDate') 
     .then(results => {
       res.json(results);
     })
@@ -64,7 +64,7 @@ router.post('/brides', bodyParser.json(),  (req, res, next) => {
     res.location(`${req.originalUrl}/${result.id}`).status(201).json(result);
   })
   .then(() => {
-    console.log(newBride)
+    console.log(newBride.weddingDate)
     return newBride
   }) 
   .catch(err => {
@@ -80,9 +80,7 @@ router.put('/brides/:id', bodyParser.json(), (req, res, next) => {
   const userId = req.user.id;
   const updateItem = { firstName, lastName, phone, email, weddingDate, location, notes };
   const options = { new: true };
-  console.log('REQ DOT BODY',req.body )
-  console.log('UPDATED ITEM ALSKJALSKJ', updateItem)
-  console.log('id', id)
+  console.log('REQ DOT BODY',req.body.weddingDate )
 
 
   Bride.findByIdAndUpdate(id, updateItem, options)
