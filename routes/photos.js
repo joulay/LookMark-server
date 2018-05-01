@@ -8,16 +8,16 @@ const router = express.Router();
 
 const jwtAuth = passport.authenticate('jwt', {session:false, failWithError: true});
 
-router.post('/upload', jwtAuth, (req, res, next) => {
-	console.log(req.user);
+router.post('/upload/:id', jwtAuth, (req, res, next) => {
+	const { id } = req.params;
 	let imageFile = req.files.file;
 	console.log(imageFile);
-	imageFile.mv(`${__dirname}/../uploads/${req.user.id}.jpg`, function(err) {
+	imageFile.mv(`${__dirname}/../uploads/${req.params.id}.jpg`, function(err) {
 	  if (err) {
 		return res.status(500).send(err);
 	  }
   
-	  res.json({file: `${req.user.id}.jpg`});
+	  res.json({file: `${req.params.id}.jpg`});
 	});
   
   })
