@@ -3,7 +3,7 @@
 const mongoose = require('mongoose');
 
 const photoSchema = new mongoose.Schema({
-    photo: { data: Buffer, contentType: String },
+    photo: { type: String, default: '' },
     brideId: { type: mongoose.Schema.Types.ObjectId, ref: 'Bride', required: true }
 });
   
