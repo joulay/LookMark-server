@@ -8,12 +8,9 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const Bride = require('../models/bride');
 
-
-
 router.use(passport.authenticate('jwt', { session: false, failWithError: true }));
 
 router.get('/brides', (req, res, next) => {
-//   const { searchTerm, folderId, tagId } = req.query;
   const userId = req.user.id;
   
   let filter = {userId};
@@ -33,7 +30,6 @@ router.get('/brides/:id', (req, res, next) => {
   const { id } = req.params;
   const userId = req.user.id;
 
-  
   if (!mongoose.Types.ObjectId.isValid(id)) {
     const err = new Error('The `id` is not valid');
     err.status = 400;

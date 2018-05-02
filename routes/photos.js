@@ -5,10 +5,23 @@ const mongoose = require('mongoose');
 const express = require('express');
 const passport = require('passport');
 const router = express.Router();
-const Photo = require('../models/photo');
+const Bride = require('../models/photo');
 
+const fileUpload = require('express-fileupload');
 
 const jwtAuth = passport.authenticate('jwt', {session:false, failWithError: true});
+
+
+router.get('/uploads/:brideId', (req, res) => {
+	Bride.findById(req.params.brideId)
+	.then(user => {
+		re.json(bride.photo)
+	})
+	.catch(err)
+})
+
+
+
 
 router.post('/upload/:id', jwtAuth, (req, res, next) => {
 	const { id } = req.params;
