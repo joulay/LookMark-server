@@ -1,6 +1,7 @@
 'use strict';
 
 const mongoose = require('mongoose');
+const photoSchema = require('./photo');
 
 const brideSchema = new mongoose.Schema({
   firstName: {type: String},
