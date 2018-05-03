@@ -43,22 +43,6 @@ describe('Lookmark API - Users', function () {
 
 describe('/api/users', function () {
     describe('POST', function () {
-        it.only('should create a new user', function () {
-            const user = { fullname, email, username, password };
-            let res;
-            return chai.request(app)
-            .post('/api/users')
-            .send(user)
-            .then(_res => {
-                res = _res;
-                expect(res).to.have.status(201);
-                expect(res.body).to.be.a('object');
-                expect(res.body).to.have.keys('id','fullName', 'email', 'username', 'password'); 
-                return User.find({username});   
-            })
-            })
-        })
-        
         it('should reject users with a missing username', function () {
             const user = { password, email, fullname };
             return chai.request(app)
@@ -85,5 +69,6 @@ describe('/api/users', function () {
         });
 
         
-    })
+        })
+    });
 });
