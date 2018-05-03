@@ -43,43 +43,6 @@ router.post('/photos/:id', jwtAuth, (req, res, next) => {
 		})
 
 	})
-		// .then(bride => {
-		// 	bride.photos.push(image); //
-		// 	bride.save(err => {
-		// 		console.log(err)
-		// 		return res.json(bride);
-		// 	})
-		// })
-		// .catch(err => {
-		// 	console.log(err);
-		// 		return res.status(500).json({
-		// 	message: 'Internal server error'
-		// })})
-//
-
-	// const { id } = req.params;
-	// const newPhoto = new Photo;
-	// newPhoto.photo.data = req.files.file.data;
-	// newPhoto.photo.contentType = req.files.file.mimetype;
-	// newPhoto.brideId = id;
-	// newPhoto.save(function (error, dbImg) {
-	// 	if(error){
-	// 		console.log('error writing image', error);
-	// 		throw error;
-	// 	} 
-	// 	console.log('saved image to db');
-	// 	res.status(201).end();
-	// })
-	// let imageFile = req.files.file;
-	// console.log(imageFile);
-	// imageFile.mv(`${__dirname}/../uploads/${req.params.id}.jpg`, function(err) {
-	//   if (err) {
-	// 	return res.status(500).send(err);
-	//   }
-  
-	//   res.json({file: `${req.params.id}.jpg`});
-	// });
-  
   })
 
 module.exports = router;

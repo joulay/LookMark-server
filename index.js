@@ -39,7 +39,9 @@ app.use(fileUpload());
 
 app.use('/uploads', express.static(__dirname + '/uploads'))
 
-// app.use(methodOverride('_method'))
+app.use('/tmp', express.static(__dirname + '/tmp'))
+app.use('/tmp/photos', express.static(__dirname + '/tmp/photos'))
+
 app.use('/api', authRouter);
 app.use('/api', usersRouter);
 app.use('/api', photoRouter);
@@ -47,7 +49,6 @@ app.use('/api', photoRouter);
 passport.use(localStrategy);
 passport.use(jwtStrategy);
 
-// app.use('/api', photoRouter);
 app.use('/api', brideRouter);
 
 function runServer(port = PORT) {
