@@ -8,9 +8,7 @@ const express = require('express');
 const passport = require('passport');
 const router = express.Router();
 const Bride = require('../models/bride');
-
-
-
+const path = require('path');
 const fileUpload = require('express-fileupload');
 
 const jwtAuth = passport.authenticate('jwt', {session:false, failWithError: true});
@@ -18,7 +16,7 @@ const jwtAuth = passport.authenticate('jwt', {session:false, failWithError: true
 router.get('/photos/:brideId', (req, res) => {
 	Bride.findById(req.params.brideId)
 	.then(user => {
-		re.json(bride.photos)
+		res.json(bride.photos)
 	})
 	.catch(err)
 })
@@ -28,19 +26,20 @@ router.get('/photos/:brideId', (req, res) => {
 
 router.post('/photos/:id', jwtAuth, (req, res, next) => {
 	const { id } = req.params;
-	const imgPath = `../uploads/photos/${req.files.file.name}`;
-	const imgClientPath = `/uploads/photos/${req.files.file.name}`;
+	const imgPath = `../tmp/photos/${req.files.file.name}`;
+	const imgClientPath = `/tmp/photos/${req.files.file.name}`;
 	const imageFile = req.files.file;
+	console.log(imageFile);
 	const image = {
 		
 		photo: imgClientPath,
 	}
-	imageFile.mv(imgPath, (err) => {
-
+	imageFile.mv(path.join(__dirname, imgPath), (err) => {
+		console.log(err);
 		Bride.findByIdAndUpdate(id, {$push:{photos:image}}, {new: true}, function (err,bride) {
 			if (err) 
 			return handleError(err);
-			res.send(bride);
+			res.send(`/photos/${req.files.file.name}`);
 		})
 
 	})

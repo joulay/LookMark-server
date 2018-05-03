@@ -20,7 +20,7 @@ const fileUpload = require('express-fileupload');
 
 
 const app = express();
-
+app.use(express.static('tmp'))
 //app.use(bodyParser.json())
 
 app.use(
