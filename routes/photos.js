@@ -39,7 +39,7 @@ router.post('/photos/:id', jwtAuth, (req, res, next) => {
 		Bride.findByIdAndUpdate(id, {$push:{photos:image}}, {new: true}, function (err,bride) {
 			if (err) 
 			return handleError(err);
-			res.send(`/photos/${req.files.file.name}`);
+			res.json(`/photos/${req.files.file.name}`);
 		})
 
 	})
