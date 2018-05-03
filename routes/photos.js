@@ -1,3 +1,5 @@
+
+
 'use strict';
 
 
@@ -5,8 +7,9 @@ const mongoose = require('mongoose');
 const express = require('express');
 const passport = require('passport');
 const router = express.Router();
-const Bride = require('../models/photo');
-const {API_BASE_URL} = require('../config.js');
+const Bride = require('../models/bride');
+
+
 
 const fileUpload = require('express-fileupload');
 
@@ -15,7 +18,7 @@ const jwtAuth = passport.authenticate('jwt', {session:false, failWithError: true
 router.get('/photos/:brideId', (req, res) => {
 	Bride.findById(req.params.brideId)
 	.then(user => {
-		re.json(bride.photo)//photos?? import photo into bride model?
+		re.json(bride.photos)
 	})
 	.catch(err)
 })
@@ -24,25 +27,36 @@ router.get('/photos/:brideId', (req, res) => {
 
 
 router.post('/photos/:id', jwtAuth, (req, res, next) => {
-	const imgPath = `${API_BASE_URL}/uploads/photos/${req.files.file.name}`;
+	const { id } = req.params;
+	const imgPath = `../uploads/photos/${req.files.file.name}`;
 	const imgClientPath = `/uploads/photos/${req.files.file.name}`;
 	const imageFile = req.files.file;
 	const image = {
+		
 		photo: imgClientPath,
 	}
 	imageFile.mv(imgPath, (err) => {
-		Bride.findById(req.params.brideId)
-		.then(bride => {
-			bride.photos.push(image);
-			bride.save(err => {
-				res.json(bride);
-			})
+
+		Bride.findByIdAndUpdate(id, {$push:{photos:image}}, {new: true}, function (err,bride) {
+			if (err) 
+			return handleError(err);
+			res.send(bride);
 		})
-		.catch(err => res.status(500).json({
-			message: 'Internal server error'
-		}))
+		// .then(bride => {
+		// 	bride.photos.push(image); //
+		// 	bride.save(err => {
+		// 		console.log(err)
+		// 		return res.json(bride);
+		// 	})
+		// })
+		// .catch(err => {
+		// 	console.log(err);
+		// 		return res.status(500).json({
+		// 	message: 'Internal server error'
+		// })})
 	})
 
+//
 
 	// const { id } = req.params;
 	// const newPhoto = new Photo;

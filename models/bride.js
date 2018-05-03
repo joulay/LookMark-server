@@ -1,7 +1,6 @@
 'use strict';
 
 const mongoose = require('mongoose');
-const photoSchema = require('./photo');
 
 const brideSchema = new mongoose.Schema({
   firstName: {type: String},
@@ -11,7 +10,7 @@ const brideSchema = new mongoose.Schema({
   weddingDate: {type: String},
   location: {type:String},
   notes: {type:String},
-  photo: {uploadStatus: false},
+  photos: [],
   created: { type: Date, default: Date.now },
   userId: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true }
   
@@ -27,10 +26,3 @@ brideSchema.set('toObject', {
 
 module.exports = mongoose.model('Bride', brideSchema);
 
-//initial get request, when displaying client detail, need 2 models: bride 
-//with each bride ID, search photo model 
-
-//create 2 promise and execute promise.all
-//serve on client side two packages: bride model and photo model
-
-//user ability to edit photo 
