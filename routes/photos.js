@@ -42,6 +42,8 @@ router.post('/photos/:id', jwtAuth, (req, res, next) => {
 			return handleError(err);
 			res.send(bride);
 		})
+
+	})
 		// .then(bride => {
 		// 	bride.photos.push(image); //
 		// 	bride.save(err => {
@@ -54,8 +56,6 @@ router.post('/photos/:id', jwtAuth, (req, res, next) => {
 		// 		return res.status(500).json({
 		// 	message: 'Internal server error'
 		// })})
-	})
-
 //
 
 	// const { id } = req.params;
