@@ -19,7 +19,6 @@ router.get('/users', (req, res, next)=> {
 
 router.post('/users', bodyParser.json(), (req, res, next) => {
   
-
   const requiredFields = ['username', 'password'];
   const missingField = requiredFields.find(field => !(field in req.body));
   
@@ -49,7 +48,7 @@ router.post('/users', bodyParser.json(), (req, res, next) => {
   
 
   let { fullName, email, username, password} = req.body;
-  fullName = fullName.trim();
+
 
   return User.hashPassword(password)
     .then(digest => {

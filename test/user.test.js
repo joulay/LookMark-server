@@ -5,18 +5,27 @@ const chai = require('chai');
 const chaiHttp = require('chai-http');
 const mongoose = require('mongoose');
 const jwt = require('jsonwebtoken');
-
-const { TEST_MONGODB_URI } = require('../config');
+const { TEST_DATABASE_URL } = require('../config');
 const { dbConnect, dbDisconnect } = require('../db-mongoose');
 const User = require('../models/user');
 
 const expect = chai.expect;
 chai.use(chaiHttp);
+// Set NODE_ENV to `test` to disable http layer logs
+// You can do this in the command line, but this is cross-platform
+process.env.NODE_ENV = 'test';
 
+// Clear the console before each run
+process.stdout.write('\x1Bc\n');
 
 describe('Lookmark API - Users', function () {
+    const fullname = 'Example User';
+    const email ='example@gmail.com'
+    const username = 'exampleUser';
+    const password = 'examplePass';
+
     before(function () {
-      return mongoose.connect(TEST_MONGODB_URL)
+      return mongoose.connect(TEST_DATABASE_URL)
         .then(() => mongoose.connection.db.dropDatabase());
     });
 
@@ -32,13 +41,48 @@ describe('Lookmark API - Users', function () {
         return mongoose.disconnect();
     });
 
-describe('POST /api/users', function () {
-    it('should create a new user', function () {
-        const newUser = { fullname, email, username, password};
-        let res;
-        return chai.request(app)
-          .post('/api/users')
-          .send(testUser)
-          .then(_res => {
-            res = _res;
-            expect(res).to.have.status(201);    
+describe('/api/users', function () {
+    describe('POST', function () {
+        it('should create a new user', function () {
+            const user = { fullname, email, username, password};
+            let res;
+            return chai.request(app)
+            .post('/api/users')
+            .send(user)
+            .then(_res => {
+                res = _res;
+                expect(res).to.have.status(201);
+                expect(res.body).to.be.a('object');
+                expect(res.body).to.have.keys('id','fullname', 'email', 'username', 'password'); 
+                return User.findById(res.body.id);   
+            })
+            })
+        })
+        
+        it('should reject users with a missing username', function () {
+            const user = { username, password };
+            return chai.request(app)
+            .post('/api/users')
+            .send(user)
+            .catch(err => err.response)
+            .then(res => {
+                expect(res).to.have.status(422);
+                expect(res.body.message).to.equal('Missing username in request body');
+            });
+        });
+
+        it('should reject users with a missing password', function() {
+            const user = { username, password};
+            return chai.request(app)
+            .post('/api/users')
+            .send(user)
+            .catch(err => err.response)
+            .then(res => {
+                expect(res).to.have.status(422);
+                expect(res.body.message).to.equal('Missing password in request body');
+            });
+        });
+
+        
+    })
+});
