@@ -1,6 +1,6 @@
 'use strict';
 
-const app = require('../index');
+const { app } = require('../index');
 const chai = require('chai');
 const chaiHttp = require('chai-http');
 const mongoose = require('mongoose');
@@ -43,8 +43,8 @@ describe('Lookmark API - Users', function () {
 
 describe('/api/users', function () {
     describe('POST', function () {
-        it('should create a new user', function () {
-            const user = { fullname, email, username, password};
+        it.only('should create a new user', function () {
+            const user = { fullname, email, username, password };
             let res;
             return chai.request(app)
             .post('/api/users')
@@ -53,26 +53,27 @@ describe('/api/users', function () {
                 res = _res;
                 expect(res).to.have.status(201);
                 expect(res.body).to.be.a('object');
-                expect(res.body).to.have.keys('id','fullname', 'email', 'username', 'password'); 
-                return User.findById(res.body.id);   
+                expect(res.body).to.have.keys('id','fullName', 'email', 'username', 'password'); 
+                return User.find({username});   
             })
             })
         })
         
         it('should reject users with a missing username', function () {
-            const user = { username, password };
+            const user = { password, email, fullname };
             return chai.request(app)
             .post('/api/users')
             .send(user)
             .catch(err => err.response)
             .then(res => {
+                console.log(res.body);
                 expect(res).to.have.status(422);
                 expect(res.body.message).to.equal('Missing username in request body');
             });
         });
 
         it('should reject users with a missing password', function() {
-            const user = { username, password};
+            const user = { username, fullname, email };
             return chai.request(app)
             .post('/api/users')
             .send(user)

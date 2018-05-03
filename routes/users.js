@@ -18,8 +18,7 @@ router.get('/users', (req, res, next)=> {
 
 
 router.post('/users', bodyParser.json(), (req, res, next) => {
-  
-  const requiredFields = ['username', 'password'];
+  const requiredFields = ['username', 'password', 'fullName', 'email'];
   const missingField = requiredFields.find(field => !(field in req.body));
   
   if(missingField) {
