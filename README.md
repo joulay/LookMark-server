@@ -4,7 +4,7 @@ An app made for makeup artists by a makeup artist.
 
 ## Live
 ```
-https://lookmark.netlify.com/signup
+https://lookmark.netlify.com
 ```
 
 ### Technologies: 
