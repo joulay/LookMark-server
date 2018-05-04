@@ -17,9 +17,7 @@ router.get('/photos/:brideId', (req, res) => {
 	})
 	.catch(err)
 })
-
-
-
+ 
 
 router.post('/photos/:id', jwtAuth, (req, res, next) => {
 	const { id } = req.params;
