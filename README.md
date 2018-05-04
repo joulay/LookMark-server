@@ -2,7 +2,7 @@
 
 An app made for makeup artists by a makeup artist.  
 
-## Live
+## View the project 
 ```
 https://lookmark.netlify.com
 ```
