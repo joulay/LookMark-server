@@ -11,12 +11,11 @@
 
 
 ### Technologies: 
-- CSS3
-- HTML5 
 - Javascript 
 - React
 - Redux
 - React-Router
+- CSS3 
 - Node
 - Express
 - MongoDB
