@@ -18,9 +18,11 @@ const localStrategy = require('./passport/local');
 const jwtStrategy = require('./passport/jwt');
 const fileUpload = require('express-fileupload');
 
+const path = require('path');
+let tmp = path.resolve(`tmp`);
 
 const app = express();
-app.use(express.static('tmp'))
+app.use(express.static(tmp))
 //app.use(bodyParser.json())
 
 app.use(
@@ -39,8 +41,6 @@ app.use(fileUpload());
 
 app.use('/uploads', express.static(__dirname + '/uploads'))
 
-app.use('/tmp', express.static(__dirname + '/tmp'))
-app.use('/tmp/photos', express.static(__dirname + '/tmp/photos'))
 
 app.use('/api', authRouter);
 app.use('/api', usersRouter);

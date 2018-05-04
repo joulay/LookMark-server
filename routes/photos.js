@@ -1,7 +1,4 @@
-
-
 'use strict';
-
 
 const mongoose = require('mongoose');
 const express = require('express');
@@ -27,7 +24,7 @@ router.get('/photos/:brideId', (req, res) => {
 router.post('/photos/:id', jwtAuth, (req, res, next) => {
 	const { id } = req.params;
 	const imgPath = `../tmp/photos/${req.files.file.name}`;
-	const imgClientPath = `/tmp/photos/${req.files.file.name}`;
+	const imgClientPath = `photos/${req.files.file.name}`;
 	const imageFile = req.files.file;
 	console.log(imageFile);
 	const image = {
