@@ -2,10 +2,10 @@
 
 An app made for makeup artists by a makeup artist.  
 
-## View the project 
-```
+## Live 
+
 https://lookmark.netlify.com
-```
+
 
 ### Technologies: 
 - CSS3
