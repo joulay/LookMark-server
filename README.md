@@ -1,10 +1,6 @@
 # LookMark
 
-<a href="https://lookmark.netlify.com">LookMark</a>An app made for makeup artists by a makeup artist.  
-
-## Live 
-
-https://lookmark.netlify.com
+<a href="https://lookmark.netlify.com">LookMark</a> is an app made for makeup artists by a makeup artist.  
 
 
 ### Technologies: 
