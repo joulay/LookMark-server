@@ -23,25 +23,20 @@ let tmp = path.resolve(`tmp`);
 
 const app = express();
 app.use(express.static(tmp))
-//app.use(bodyParser.json())
 
+console.log('some text in front of it', process.env.NODE_ENV);
 app.use(
   morgan(process.env.NODE_ENV === 'production' ? 'common' : 'dev', {
     skip: () => process.env.NODE_ENV === 'test'
   })
 );
 
-app.use(
-  cors(
-    // {origin: CLIENT_ORIGIN}
-  )
-);
+app.use(cors());
 
 app.use(fileUpload());
 
 app.use('/uploads', express.static(__dirname + '/uploads'))
 const env = process.env.NODE_ENV || 'development';
-console.log('alskdjalskdjalskjdasdjasd', env)
 
 app.use('/api', authRouter);
 app.use('/api', usersRouter);

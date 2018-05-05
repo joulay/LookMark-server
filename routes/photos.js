@@ -23,8 +23,6 @@ router.get('/photos/:brideId', (req, res) => {
 router.post('/photos/:id', jwtAuth, (req, res, next) => {
 	const { id } = req.params;
 	const imageFile = req.files.file;
-	console.log('ja imagefileeeeeeeeeeeeeeeeee', imageFile);
-	
 	
 	const encoded = imageFile.data.toString('base64')   
 	
