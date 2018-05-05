@@ -32,9 +32,9 @@ app.use(
 );
 
 app.use(
-  cors({
-    origin: CLIENT_ORIGIN
-  })
+  cors(
+    // {origin: CLIENT_ORIGIN}
+  )
 );
 
 app.use(fileUpload());
@@ -61,11 +61,6 @@ function runServer(port = PORT) {
       console.error(err);
     });
 }
-app.use(function (req, res, next) {
-  const err = new Error('Not Found');
-  err.status = 404;
-  next(err);
-});
 
 // Catch-all Error handler
 // Add NODE_ENV check to prevent stacktrace leak
