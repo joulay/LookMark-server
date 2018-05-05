@@ -23,6 +23,7 @@ let tmp = path.resolve(`tmp`);
 
 const app = express();
 app.use(express.static(tmp))
+app.use(cors({origin: '*'}));
 
 console.log('some text in front of it', process.env.NODE_ENV);
 app.use(
