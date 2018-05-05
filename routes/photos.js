@@ -7,6 +7,7 @@ const router = express.Router();
 const Bride = require('../models/bride');
 const path = require('path');
 const fileUpload = require('express-fileupload');
+const imgur = require('imgur');
 
 const jwtAuth = passport.authenticate('jwt', {session:false, failWithError: true});
 
@@ -21,21 +22,35 @@ router.get('/photos/:brideId', (req, res) => {
 
 router.post('/photos/:id', jwtAuth, (req, res, next) => {
 	const { id } = req.params;
-	const imgPath = `../tmp/photos/${req.files.file.name}`;
-	const imgClientPath = `photos/${req.files.file.name}`;
 	const imageFile = req.files.file;
-	console.log(imageFile);
-	const image = {
-		
-		photo: imgClientPath,
-	}
-	imageFile.mv(path.join(__dirname, imgPath), (err) => {
-		console.log(err);
-		Bride.findByIdAndUpdate(id, {$push:{photos:image}}, {new: true}, function (err,bride) {
+	console.log('ja imagefileeeeeeeeeeeeeeeeee', imageFile);
+	
+	
+	const encoded = imageFile.data.toString('base64')   
+	
+	imgur.uploadBase64(encoded)   
+	.then(function (json) {       
+		let url = json.data.link;  
+		const image = { photo: url }
+		  console.log('link',json.data.link);  
+		  Bride.findByIdAndUpdate(id, {$push:{photos:image}}, {new: true}, function (err,bride) {
 			if (err) 
-			return handleError(err);
-			res.json(`/photos/${req.files.file.name}`);
-		})
+				return handleError(err);
+				res.json(`${image}`); 
+		})   
+	  .catch(function (err) {       
+		console.error('err', err);   
+		});
+		
+	
+
+	// imageFile.mv(path.join(__dirname, imgPath), (err) => {
+	// 	console.log(err);
+	// 	Bride.findByIdAndUpdate(id, {$push:{photos:image}}, {new: true}, function (err,bride) {
+	// 		if (err) 
+	// 		return handleError(err);
+	// 		res.json(`/photos/${req.files.file.name}`);
+	// 	})
 
 	})
   })
