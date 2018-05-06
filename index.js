@@ -22,9 +22,12 @@ const path = require('path');
 let tmp = path.resolve(`tmp`);
 
 const app = express();
+
+passport.use(localStrategy);
+passport.use(jwtStrategy);
+
 app.use(express.static(tmp));
 
-console.log('some text in front of it', process.env.NODE_ENV);
 app.use(
   morgan(process.env.NODE_ENV === 'production' ? 'common' : 'dev', {
     skip: () => process.env.NODE_ENV === 'test'
@@ -36,19 +39,12 @@ app.use(
     origin: CLIENT_ORIGIN
   })
 );
-
 app.use(fileUpload());
-
 app.use('/uploads', express.static(__dirname + '/uploads'));
-const env = process.env.NODE_ENV || 'development';
 
 app.use('/api', authRouter);
 app.use('/api', usersRouter);
 app.use('/api', photoRouter);
-
-passport.use(localStrategy);
-passport.use(jwtStrategy);
-
 app.use('/api', brideRouter);
 
 function runServer(port = PORT) {
