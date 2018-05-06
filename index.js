@@ -22,8 +22,8 @@ const path = require('path');
 let tmp = path.resolve(`tmp`);
 
 const app = express();
-app.use(express.static(tmp))
-app.use(cors({origin: '*'}));
+app.use(express.static(tmp));
+app.use(cors({ origin: '*' }));
 
 console.log('some text in front of it', process.env.NODE_ENV);
 app.use(
@@ -32,11 +32,15 @@ app.use(
   })
 );
 
-app.use(cors());
+app.use(
+  cors({
+    origin: CLIENT_ORIGIN
+  })
+);
 
 app.use(fileUpload());
 
-app.use('/uploads', express.static(__dirname + '/uploads'))
+app.use('/uploads', express.static(__dirname + '/uploads'));
 const env = process.env.NODE_ENV || 'development';
 
 app.use('/api', authRouter);
@@ -61,7 +65,7 @@ function runServer(port = PORT) {
 
 // Catch-all Error handler
 // Add NODE_ENV check to prevent stacktrace leak
-app.use(function (err, req, res, next) {
+app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.json({
     message: err.message,
