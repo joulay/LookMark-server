@@ -16,6 +16,9 @@ router.get('/users', (req, res, next)=> {
     .catch(err => res.statusMessage(500).json({message: 'Internal server error'}));
 }); 
 
+router.get('/test', (req, res, next)=> {     
+  res.json({test:'test'});    
+}); 
 
 router.post('/users', bodyParser.json(), (req, res, next) => {
   const requiredFields = ['username', 'password', 'fullName', 'email'];
