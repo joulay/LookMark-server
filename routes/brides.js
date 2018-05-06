@@ -111,7 +111,6 @@ router.put('/brides/:id', bodyParser.json(), (req, res, next) => {
     notes
   };
   const options = { new: true };
-  console.log('REQ DOT BODY', req.body.weddingDate);
 
   Bride.findByIdAndUpdate(id, updateItem, options)
     .then(result => {
