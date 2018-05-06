@@ -13,10 +13,12 @@
 
 ### Technologies: 
 - Javascript 
+- CSS3 
 - React
 - Redux
 - React-Router
-- CSS3 
+- Imgur
+- FileUpload
 - Node
 - Express
 - MongoDB
