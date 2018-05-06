@@ -23,24 +23,21 @@ router.get('/photos/:brideId', (req, res) => {
 router.post('/photos/:id', jwtAuth, (req, res, next) => {
 	const { id } = req.params;
 	const imageFile = req.files.file;
-	
 	const encoded = imageFile.data.toString('base64')   
-	
+
 	imgur.uploadBase64(encoded)   
 	.then(function (json) {       
 		let url = json.data.link;  
 		const image = { photo: url }
-		  console.log('link',json.data.link);  
-		  Bride.findByIdAndUpdate(id, {$push:{photos:image}}, {new: true}, function (err,bride) {
+		  Bride.findByIdAndUpdate(id, {$addToSet:{photos:image}}, {new: true}, function (err,bride) {
 			if (err) 
 				return handleError(err);
-				res.json(`${image}`); 
+				res.json(`${image}`); 	
 		})   
 	  .catch(function (err) {       
 		console.error('err', err);   
 		});
-		
-	
+			
 
 	// imageFile.mv(path.join(__dirname, imgPath), (err) => {
 	// 	console.log(err);
