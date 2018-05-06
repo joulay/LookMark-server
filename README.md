@@ -1,45 +1,32 @@
-# Thinkful Backend Template
+# LookMark
 
-A template for developing and deploying Node.js apps.
+<a href="https://lookmark.netlify.com">LookMark</a> is an app for bridal makeup artists. Preview/engagement sessions take place weeks/months before the actual wedding. So it would be great to be able to have notes on the photo regarding allergies, specifications or details, but since this feature isn't available that's how this app was born. It's meant to bookmark looks/notes in an organized way where it's filtered by date so it can be easily retrieved. 
 
-## Getting started
 
-### Setting up a project
+<img width="1184" alt="screen shot 2018-05-04 at 11 28 32 am" src="https://user-images.githubusercontent.com/24361293/39646333-ea0fa876-4f8f-11e8-986e-b7eee7d8f0f1.png">
+<img width="1182" alt="screen shot 2018-05-04 at 11 49 10 am" src="https://user-images.githubusercontent.com/24361293/39646712-3309293e-4f91-11e8-8dc4-b787dcd181f9.png">
+<img width="1185" alt="screen shot 2018-05-04 at 11 33 18 am" src="https://user-images.githubusercontent.com/24361293/39646387-1d175b4c-4f90-11e8-9416-73845169d41d.png">
+<img width="1182" alt="screen shot 2018-05-04 at 11 47 35 am" src="https://user-images.githubusercontent.com/24361293/39646780-6783c43a-4f91-11e8-8abe-eab0ae6c9236.png">
+<img width="1184" alt="screen shot 2018-05-04 at 11 36 58 am" src="https://user-images.githubusercontent.com/24361293/39646404-2d30f9b6-4f90-11e8-9d5e-16a294f64d32.png">
 
-* Move into your projects directory: `cd ~/YOUR_PROJECTS_DIRECTORY`
-* Clone this repository: `git clone https://github.com/Thinkful-Ed/backend-template YOUR_PROJECT_NAME`
-* Move into the project directory: `cd YOUR_PROJECT_NAME`
-* Install the dependencies: `npm install`
-* Create a new repo on GitHub: https://github.com/new
-    * Make sure the "Initialize this repository with a README" option is left unchecked
-* Update the remote to point to your GitHub repository: `git remote set-url origin https://github.com/YOUR_GITHUB_USERNAME/YOUR_REPOSITORY_NAME`
+<a href="https://github.com/joulay/capstone-client">front end code</a>
 
-### Working on the project
+### Technologies: 
+- Javascript 
+- React
+- Redux
+- React-Router
+- CSS3 
+- Node
+- Express
+- MongoDB
+- Mongoose
+- Passport
+- Mocha
+- Chai 
+- Netlify
+- Heroku 
 
-* Move into the project directory: `cd ~/YOUR_PROJECTS_DIRECTORY/YOUR_PROJECT_NAME`
-* Run the development task: `npm start`
-    * Starts a server running at http://localhost:8080
-    * Automatically restarts when any of your files change
+### Author: 
+Julie Kim
 
-## Databases
-
-By default, the template is configured to connect to a MongoDB database using Mongoose.  It can be changed to connect to a PostgreSQL database using Knex by replacing any imports of `db-mongoose.js` with imports of `db-knex.js`, and uncommenting the Postgres `DATABASE_URL` lines in `config.js`.
-
-## Deployment
-
-Requires the [Heroku CLI client](https://devcenter.heroku.com/articles/heroku-command-line).
-
-### Setting up the project on Heroku
-
-* Move into the project directory: `cd ~/YOUR_PROJECTS_DIRECTORY/YOUR_PROJECT_NAME`
-* Create the Heroku app: `heroku create PROJECT_NAME`
-
-* If your backend connects to a database, you need to configure the database URL:
-    * For a MongoDB database: `heroku config:set DATABASE_URL=mongodb://USERNAME:PASSWORD@HOST:PORT/DATABASE_NAME`
-    * For a PostgreSQL database: `heroku config:set DATABASE_URL=postgresql://USERNAME:PASSWORD@HOST:PORT/DATABASE_NAME`
-
-* If you are creating a full-stack app, you need to configure the client origin: `heroku config:set CLIENT_ORIGIN=https://www.YOUR_DEPLOYED_CLIENT.com`
-
-### Deploying to Heroku
-
-* Push your code to Heroku: `git push heroku master`
