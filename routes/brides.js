@@ -79,10 +79,7 @@ router.post('/brides', bodyParser.json(), (req, res, next) => {
         .status(201)
         .json(result);
     })
-    .then(() => {
-      console.log(newBride.weddingDate);
-      return newBride;
-    })
+    .then(() =>  newBride)
     .catch(err => {
       console.log(err);
       next(err);

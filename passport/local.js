@@ -4,7 +4,6 @@ const {Strategy: LocalStrategy} = require('passport-local');
 const User = require ('../models/user');
 
 const localStrategy = new LocalStrategy((username, password, done) => {
-  console.log(username, password);
   let user;
   User
     .findOne({ username })
@@ -31,7 +30,6 @@ const localStrategy = new LocalStrategy((username, password, done) => {
       return done(null, user);    
     })
     .catch(err => {
-      console.log(err, 'asldkjalskdjlaksjdlkajsdlkajsdlj');
       if (err.reason === 'LoginError') {
         return done(null, false);
       }

@@ -50,7 +50,6 @@ describe('/api/users', function () {
             .send(user)
             .catch(err => err.response)
             .then(res => {
-                console.log(res.body);
                 expect(res).to.have.status(422);
                 expect(res.body.message).to.equal('Missing username in request body');
             });
