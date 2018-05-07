@@ -32,7 +32,7 @@ router.post('/photos/:id', jwtAuth, (req, res, next) => {
 		  Bride.findByIdAndUpdate(id, {$addToSet:{photos:image}}, {new: true}, function (err,bride) {
 			if (err) 
 				return handleError(err);
-				res.json(`${image}`); 	
+				res.json(image); 	
 		})   
 	  .catch(function (err) {       
 		console.error('err', err);   
