@@ -61,6 +61,7 @@ function runServer(port = PORT) {
 // Catch-all Error handler
 // Add NODE_ENV check to prevent stacktrace leak
 app.use(function(err, req, res, next) {
+  console.log(err);
   res.status(err.status || 500);
   res.json({
     message: err.message,

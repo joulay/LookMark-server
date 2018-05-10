@@ -48,6 +48,20 @@ router.post('/photos/:id', jwtAuth, (req, res, next) => {
 	// 	})
 
 	})
-  })
+})
+
+router.delete('/photos/:id', jwtAuth, (req, res) => {
+
+	console.log('sldkfjslkdfjslkdjf', req.user.id);
+	Bride.findByIdAndUpdate(req.params.id, {$pull:{"photos":{photo:req.body.photo}}}, {new:true})
+	.then((user)=> {
+		console.log(user)
+		res.status(204).end();
+	})
+	.catch(err=> {
+		console.log('sldkfjlsdjkflsdkfjsldkjf',err);
+		next(err);
+	})
+})
 
 module.exports = router;
