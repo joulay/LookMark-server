@@ -8,7 +8,6 @@ const passport = require('passport');
 
 const { PORT, CLIENT_ORIGIN } = require('./config');
 const { dbConnect } = require('./db-mongoose');
-// const methodOverride = require('method-override');
 
 const usersRouter = require('./routes/users');
 const authRouter = require('./routes/auth');
