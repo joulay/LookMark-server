@@ -41,7 +41,7 @@ app.use(
 );
 app.use(fileUpload());
 app.use('/uploads', express.static(__dirname + '/uploads'));
-
+ 
 app.use('/api', authRouter);
 app.use('/api', usersRouter);
 app.use('/api', photoRouter);
