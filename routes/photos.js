@@ -16,7 +16,6 @@ router.get('/photos/:brideId', (req, res) => {
 	.then(user => {
 		res.json(bride.photos)
 	})
-	.catch(err)
 })
  
 
