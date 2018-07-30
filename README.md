@@ -9,7 +9,7 @@ Get a User:
 Get a Bride: 
   GET: /api/brides/:id
     Requires
-      { id } in req.params and req.user;
+      { id } in req.params 
     
 Get a Photo: 
   GET: /api/photos/:brideId
@@ -17,7 +17,7 @@ Get a Photo:
 Edit a bride: 
   PUT: /api/brides/:it
     Requires
-      { id } in req.params and req.user
+      { id } in req.params 
       { firstName, lastName, phone, email, weddingDate, location, notes } in req.body
      
 Post a Photo: 
@@ -28,7 +28,7 @@ Post a Photo:
 Delete a Bride:
   DELETE: /api/brides/:id
     Requires
-      { id } in req.params and req.user
+      { id } in req.params 
 
 Delete a Photo: 
   DELETE: /api/photos/:id
